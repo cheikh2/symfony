@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% form_theme formService 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+<h5> AJOUT SERVICE </h5>
+
+{{ form_start(formService) }}
+
+{{ form_widget(formService.libelle, {'attr': {'placeholder': "Libelle du Service"}}) }}
+
+<button type="submit" class="btn btn-success">Ajout Medecin</button>
+
+{{ form_end(formService) }}
+{% endblock %}

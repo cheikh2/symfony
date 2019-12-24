@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% form_theme formSpecialite 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+<h5> AJOUT SPECIALITE </h5>
+
+{{ form_start(formSpecialite) }}
+
+{{ form_widget(formSpecialite.name, {'attr': {'placeholder': "Nom Spaecialite"}}) }}<br>
+
+{{ form_end(formSpecialite) }}
+{% endblock %}

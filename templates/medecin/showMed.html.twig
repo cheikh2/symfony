@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="container mt-4">
+<h5>LES MEDECINS</h5>
+{% for message in app.flashes('success') %}
+<div class="alert alert-success">
+{{ message }}
+</div>
+{% endfor %}
+<div class="text-right">
+    <a href="{{ path('medecin.medecin.addMed') }}" class="btn btn-primary">AJOUTER UN MEDECIN</a>
+</div>
+<table class="table table-stripped">
+    <thead>
+        <tr>
+            <th>MATRICULE</th>
+            <th>PRENOM</th>
+            <th>NOM</th>
+            <th>TELEPHONE</th>
+            <th>SERVICE</th>
+            <th>DATE DE NAISSANCE</th>
+             <th>ACTION 1 - ACTION 2</th>
+        </tr>
+    </thead>
+    <tbody>
+     {% for medecin in medecins %}
+        <tr>
+            <td>{{ medecin.matricule }}</td>
+            <td>{{ medecin.prenom }}</td>
+            <td>{{ medecin.nom }}</td>
+            <td>{{ medecin.telephone }}</td>
+            <td>{{ medecin.service.libelle }}</td>
+            <td>{{ medecin.date|date("d/m/Y") }}</td>
+        <td>
+            <a href="{{ path('medecin.medecin.editMed', {id: medecin.id}) }}" class="btn btn-primary">Editer</a>
+           
+            <form method="post" action="{{ path('medecin.medecin.delete', {id: medecin.id}) }}" style="display:
+            inline-block" onsubmit="return confirm('Voulez-vous vraiment supprimer')">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ medecin.id) }}">
+            <button class="btn btn-danger">Supprimer</button>
+            </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}
+
